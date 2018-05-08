@@ -1,0 +1,16 @@
+Loop through hash
+  d = {'x': 1, 'y': 2, 'z': 3} 
+  
+  for key,val in d.items():
+      print key, 'is the key for ', val
+      
+  for the_key, the_value in d.iteritems():
+      print the_key, 'corresponds to', the_value
+      
+  for my_var in d:
+      print my_var, 'corresponds to', d[my_var]
+
+
+Keys/values
+  d.keys()
+  d.values()
