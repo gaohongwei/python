@@ -1,0 +1,19 @@
+Write
+  import yaml
+  d = {'A':'a', 'B':{'C':'c', 'D':'d', 'E':'e'}}
+  with open('data.yml', 'w') as yaml_file:
+    yaml.dump(d, yaml_file, default_flow_style=False)
+
+  with io.open('data.yml', 'w') as yaml_file:
+    yaml.dump(data, yaml_file, default_flow_style=False, allow_unicode=True)
+
+Read
+  import yaml
+  with open('data.yml') as stream:
+      # use safe_load instead load
+      data_loaded = yaml.safe_load(stream)
+      print(data_loaded)
+
+  with open("data.yml", 'r') as stream:
+      data_loaded = yaml.load(stream)
+      print(data_loaded)
