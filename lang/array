@@ -1,0 +1,7 @@
+Loop
+  ar = ['aa', 'bb', 'cc']
+  for ele in ar:
+    print ele
+  
+len
+  len(ar)    
