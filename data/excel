@@ -1,0 +1,16 @@
+import pandas as pd
+fname = 'fname.xlsx'
+##### 
+xl = pd.ExcelFile(fname)
+xl.sheet_names
+  [u'Sheet1', u'Sheet2', u'Sheet3']
+df = xl.parse("snap")
+#####
+df = pd.read_excel(fname, sheetname='snap')
+df = pd.read_excel(open(fname,'rb'), sheetname='snap')
+df = pd.read_excel(open(fname,'rb'), sheetname=1)
+##### read data
+df.tail()
+columns = ['Open', 'Adj Close' ]
+subset = df[columns]
+subset.head()
