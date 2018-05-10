@@ -1,0 +1,3 @@
+import numpy as np
+dataset = np.loadtxt('./example.csv', delimiter=",")
+data =  np.loadtxt(fname = f, delimiter = ',')
