@@ -1,3 +1,8 @@
 import numpy as np
 dataset = np.loadtxt('./example.csv', delimiter=",")
 data =  np.loadtxt(fname = f, delimiter = ',')
+
+import pandas as pd
+input_file = "mydata.csv"
+# comma delimited is the default
+df = pd.read_csv(input_file, header = 0)
