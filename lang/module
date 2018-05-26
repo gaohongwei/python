@@ -1,0 +1,16 @@
+Modules
+  a module is a Python file with some functions or variables in it.
+  import that file.
+  access that module with the '.' (dot) operator.
+
+  # this goes in mystuff.py def apple():
+  print "I AM APPLES!"
+  def apple():
+    print "I AM APPLES!"
+  # this is just a variable
+  tangerine = "Living reflection of a dream"
+
+  # Usage
+  import mystuff
+  mystuff.apple()
+  print mystuff.tangerine
