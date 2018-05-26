@@ -1,0 +1,38 @@
+String
+  s= "Let's talk about %s." % my_name
+  s= "He's got %s eyes and %s hair." % (my_eyes, my_hair)
+
+  s = "Those who know %s and those who %s." % (binary, do_not)
+  formatter = "%r %r %r %r"
+  s= formatter % (1, 2, 3, 4)
+  s= formatter % ("one", "two", "three", "four")
+
+Print
+  >>> days = "Mon Tue Wed Thu Fri Sat Sun"
+  >>> print "Here are the days: ", days
+
+
+Script Argument
+  from sys import argv
+  script, first, second, third = argv
+
+Methods
+  def print_two(*args):
+    arg1, arg2 = args
+    print "arg1: %r, arg2: %r" % (arg1, arg2)
+
+if
+  if 
+  elif
+  else
+
+loop
+  fruits = ['apples', 'oranges', 'pears', 'apricots']
+  for fruit in fruits:
+  for i in range(0, 6):
+
+Dict/Hash
+  stuff = {'name': 'Zed', 'age': 36, 'height': 6*12+2}
+  stuff['name']
+  >>> stuff['city'] = "San Francisco"
+  >>> print stuff['city']
