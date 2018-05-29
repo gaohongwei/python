@@ -1,4 +1,4 @@
-
+# https://code.tutsplus.com/articles/how-to-use-restful-web-apis-in-python--cms-29493
 import requests
 url = 'http://localhost:5000/'
 req = requests.get(url)
@@ -6,6 +6,7 @@ req.encoding
 req.text
 req.status_code
 
+req.json()
 
 r = requests.post('http://127.0.0.1/api/v1/add_item', data = {'task':'Shopping'})
 r = requests.put('http://127.0.0.1/api/v1/add_item', data = {'task':'Shopping at 2'})
