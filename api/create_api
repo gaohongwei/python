@@ -1,0 +1,39 @@
+# sudo pip install requests
+# sudo pip install Flask
+# sudo pip install flask-restful
+
+from flask import Flask, request
+from flask_restful import Resource, Api
+
+todos = {
+  'id1' : 'this is id1',
+  'id2' : 'this is id2'
+}
+
+class R1(Resource):
+  def get(self):
+    return "API r1"
+
+  def put(self, todo_id):
+      todos[todo_id] = request.form['data']
+      return {todo_id: todos[todo_id]}
+class R2(Resource):
+  def get(self):
+    return "API r2"
+
+class R3(Resource):
+  def get(self, todo_id):
+      return {todo_id: todos[todo_id]}
+
+  def put(self, todo_id):
+      todos[todo_id] = request.form['data']
+      return {todo_id: todos[todo_id]}
+
+app = Flask(__name__)
+api = Api(app)
+api.add_resource(R1, '/r1')
+api.add_resource(R2, '/r2')
+api.add_resource(R3, '/r3/<string:todo_id>')
+
+if __name__ == '__main__':
+    app.run(debug=True)
