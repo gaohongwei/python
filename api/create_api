@@ -2,6 +2,13 @@
 # sudo pip install requests
 # sudo pip install Flask
 # sudo pip install flask-restful
+# sudo pip3 install requests
+# sudo pip3 install Flask
+# sudo pip3 install flask-restful
+sudo apt-get install python3.6 python3-pip
+python  --version
+python3 --version
+pip3 --version
 
 from flask import Flask, request
 from flask_restful import Resource, Api
