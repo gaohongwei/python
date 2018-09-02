@@ -1,0 +1,14 @@
+# save plot png  
+  import matplotlib
+  matplotlib.use('Agg') # agg
+  import matplotlib.pyplot as plt # keep order
+  plt.plot([1,2,3])
+  plt.savefig('myfig')
+  
+# Save sns png
+  import seaborn as sns; 
+  iris = sns.load_dataset('iris')        
+  iris.head()
+  sns.set() 
+  sns_plot = sns.pairplot(iris, hue='species', size=1.5);
+  sns_plot.savefig('myfig')
