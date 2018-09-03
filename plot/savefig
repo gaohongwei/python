@@ -12,3 +12,6 @@
   sns.set() 
   sns_plot = sns.pairplot(iris, hue='species', size=1.5);
   sns_plot.savefig('myfig')
+  
+# Clear
+  plt.gcf().clear()
