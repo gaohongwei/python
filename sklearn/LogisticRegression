@@ -1,24 +1,52 @@
-import pandas as pd
-from sklearn.cross_validation import train_test_split
-from sklearn.metrics import accuracy_score 
-#from sklearn.naive_bayes import GaussianNB 
-from sklearn import linear_model
+# Stock
+  import pandas as pd
+  from sklearn.cross_validation import train_test_split
+  from sklearn.metrics import accuracy_score 
+  #from sklearn.naive_bayes import GaussianNB 
+  from sklearn import linear_model
 
-input_file = "snap.csv"
-df = pd.read_csv(input_file)
+  input_file = "snap.csv"
+  df = pd.read_csv(input_file)
 
-df['Buy'] =  (df['Close'] < df['Close'].shift(-1)).astype(float)
+  df['Buy'] =  (df['Close'] < df['Close'].shift(-1)).astype(float)
 
-columns = ['Open', 'Close', 'High','Low', 'Volume']
-X = df[columns]
-y = df['Buy']
+  columns = ['Open', 'Close', 'High','Low', 'Volume']
+  X = df[columns]
+  y = df['Buy']
 
-Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, random_state=0)
+  Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, random_state=0)
 
-model = linear_model.LogisticRegression(C=1e5)
-#model = GaussianNB()
-model.fit(Xtrain, ytrain)
-y_model = model.predict(Xtest)
-pct = accuracy_score(ytest, y_model)
-predit = model.predict(X)
-error = y - predit
+  model = linear_model.LogisticRegression(C=1e5)
+  #model = GaussianNB()
+  model.fit(Xtrain, ytrain)
+  y_model = model.predict(Xtest)
+  pct = accuracy_score(ytest, y_model)
+  predit = model.predict(X)
+  error = y - predit
+
+#### Credit Card
+  import pandas as pd
+  from sklearn.cross_validation import train_test_split
+  from sklearn.metrics import accuracy_score 
+  #from sklearn.naive_bayes import GaussianNB 
+  from sklearn import linear_model
+
+  input_file = "creditcard.csv"
+  df = pd.read_csv(input_file)
+
+  columns = ["V{:d}".format(x) for x in range(1,29)]
+  columns.append('Amount')
+
+  X = df[columns]
+  y = df['Class']
+
+  Xtrain, Xtest, ytrain, ytest = train_test_split(X, y, test_size=0.4, random_state=0)
+
+  model = linear_model.LogisticRegression(C=1e5)
+  #model = GaussianNB()
+  model.fit(Xtrain, ytrain)
+  y_model = model.predict(Xtest)
+  pct = accuracy_score(ytest, y_model)
+  pct
+  predit = model.predict(X)
+  error = y - predit
