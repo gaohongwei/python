@@ -1,0 +1,13 @@
+import pandas as pd
+input_file = "snap.csv"
+# comma delimited is the default
+df = pd.read_csv(input_file)
+
+df = df.drop('column_name', 1)
+df = df[['Date', 'Volume', 'Close']]
+
+Create new column
+df['profitable'] = np.where(df['Close']>=11.5, True, False)
+df['Buy'] =  df['Close'] > df['Close'].shift(-1)
+
+df['Last_Close'] = df['Close'].shift(-1)
