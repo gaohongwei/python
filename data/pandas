@@ -1,13 +1,16 @@
-import pandas as pd
-input_file = "snap.csv"
-# comma delimited is the default
-df = pd.read_csv(input_file)
-
-df = df.drop('column_name', 1)
-df = df[['Date', 'Volume', 'Close']]
+Load data
+  import pandas as pd
+  input_file = "snap.csv"
+  # comma delimited is the default
+  df = pd.read_csv(input_file)
 
 Create new column
-df['profitable'] = np.where(df['Close']>=11.5, True, False)
-df['Buy'] =  df['Close'] > df['Close'].shift(-1)
+  df['profitable'] = np.where(df['Close']>=11.5, True, False)
+  df['Buy'] =  df['Close'] > df['Close'].shift(-1)
+  df['Last_Close'] = df['Close'].shift(-1)
+  df['Buy'] =  (df['Close'] > df['Close'].shift(1)).astype(float)
 
-df['Last_Close'] = df['Close'].shift(-1)
+drop column
+  del df['Adj Close']
+  df = df.drop('column_name', 1)
+  df = df[['Date', 'Volume', 'Close']]
