@@ -9,13 +9,21 @@ Select dimension
 
   import numpy as np
   from sklearn.decomposition import PCA
+  import matplotlib
+  matplotlib.use('Agg') # agg
+  import matplotlib.pyplot as plt # keep order
 
   np.random.seed(0)
-  my_matrix = np.random.randn(20, 5)
+  my_matrix = np.random.randn(20, 6)
 
-  my_model = PCA(n_components=5)
-  my_model.fit_transform(my_matrix)
+  pca = PCA().fit(my_matrix)
 
-  my_model.explained_variance_
-  my_model.explained_variance_ratio_
-  my_model.explained_variance_ratio_.cumsum()
+  pca.explained_variance_
+  pca.explained_variance_ratio_
+  pca.explained_variance_ratio_.cumsum()
+
+  plt.plot(np.cumsum(pca.explained_variance_ratio_))
+  plt.xlabel('number of components')
+  plt.ylabel('cumulative explained variance');
+
+  plt.savefig('myfig')
