@@ -16,7 +16,9 @@ Select dimension
   np.random.seed(0)
   my_matrix = np.random.randn(20, 6)
 
-  pca = PCA().fit(my_matrix)
+  # pca = PCA().fit(my_matrix)
+  pca = PCA()
+  pca.fit(my_matrix)
 
   pca.explained_variance_
   pca.explained_variance_ratio_
