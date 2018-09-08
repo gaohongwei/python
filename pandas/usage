@@ -4,6 +4,10 @@ Load data
   # comma delimited is the default
   df = pd.read_csv(input_file)
 
+  url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"  
+  columns = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'Class']  
+  dataset = pd.read_csv(url, columns=columns) 
+
 Create new column, assign value, conditions
   df['profitable'] = np.where(df['Close']>=11.5, True, False)
   df['Buy'] =  df['Close'] > df['Close'].shift(-1)
@@ -20,3 +24,6 @@ drop column
   del df['Adj Close']
   df = df.drop('column_name', 1)
   df = df[['Date', 'Volume', 'Close']]
+  
+  X = dataset.drop('Class', 1)  
+  y = dataset['Class']  
