@@ -1,21 +1,22 @@
 # Create as common method
-def create_pipeline(model):
+def create_pipeline(model, pca_count):
   from sklearn.pipeline import Pipeline
   from sklearn.decomposition import PCA
   from sklearn.preprocessing import StandardScaler
   pipe = Pipeline([
     ('sc', StandardScaler()),
-    ('pca', PCA()),
+    ('pca', PCA(n_components=pca_count)),
     ('model',model)
     ])
   return pipe
-def try_pipeline():
+
+def try_pipeline(pca_count):
   from sklearn.svm import SVC  
   from sklearn.datasets import load_digits  
   digits = load_digits()
   X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.20, random_state=0)
   model = SVC()
-  pipe = create_pipeline(model)
+  pipe = create_pipeline(model, pca_count)
   pipe.fit(X_train,y_train)
   print(pipe.score(X_test,y_test))
 
