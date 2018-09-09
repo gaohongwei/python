@@ -2,7 +2,9 @@ def select_training_model():
   #from sklearn.ensemble import RandomForestClassifier
   #classifier = RandomForestClassifier(max_depth=2, random_state=0)
   from sklearn import linear_model
-  model = linear_model.LogisticRegression(C=1e5)
+  params = {'C': 1e5}
+  model = linear_model.LogisticRegression(**params)  
+  #       linear_model.LogisticRegression(C=1e5)
   return model
 
 def eval_model(Xtest,Ytest,train_model):
