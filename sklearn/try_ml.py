@@ -1,4 +1,4 @@
-def try_pipe_line():
+def try_pipeline():
   from sklearn.pipeline import Pipeline
   from sklearn.svm import SVC
   from sklearn.decomposition import PCA
@@ -16,4 +16,4 @@ def try_pipe_line():
   pipe.fit(X_train,y_train)
   print(pipe.score(X_test,y_test))
 
-try_pipe_line()
+try_pipeline()
