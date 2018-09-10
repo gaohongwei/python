@@ -46,6 +46,22 @@ def try_pipeline():
   pipe.fit(X_train,y_train)
   print(pipe.score(X_test,y_test))
 
+def try_pipeline_cv():
+  from sklearn import linear_model
+  model = linear_model.LogisticRegression(C=1e5)
+  # PCA count
+  from sklearn.datasets import load_digits
+  digits = load_digits()
+  pca_count = find_pca_count(digits.data)
+  # Create pipe
+  pipe = create_pipeline(model, pca_count)
+  # Create CV
+  from sklearn.model_selection import cross_val_score
+  from sklearn.model_selection import cross_validate
+  scores = cross_validate(pipe, digits.data, digits.target,
+                          cv=10, return_train_score=True)
+  return scores  
+  
 def try_pipeline0():
   from sklearn.pipeline import Pipeline
   from sklearn.svm import SVC
