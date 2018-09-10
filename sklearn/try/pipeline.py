@@ -1,28 +1,3 @@
-# Create as common method
-def select_pca_by_variance(pct_sum):
-  comp_len = len(pct_sum)
-  index = 0
-  last_sum = 0.0
-  while index < comp_len:
-    current_sum = pct_sum[index]
-    current_pct = current_sum - last_sum
-    last_sum = current_sum
-    if ( current_sum > 0.95 and current_pct < 0.01 ) or \
-       ( current_sum > 0.90 and current_pct < 0.02):
-      break
-    else:
-      index += 1
-  return index
-
-def find_pca_count(X):
-  from sklearn.preprocessing import StandardScaler
-  from sklearn.decomposition import PCA  
-  sc = StandardScaler()
-  Xpca = sc.fit_transform(X)
-  pca = PCA()
-  pca.fit(Xpca)
-  return select_pca_by_variance(pca.explained_variance_ratio_.cumsum())
-
 def create_pipeline(model, pca_count):
   from sklearn.pipeline import Pipeline
   from sklearn.decomposition import PCA
