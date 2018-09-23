@@ -27,3 +27,6 @@ drop column
   
   X = dataset.drop('Class', 1)  
   y = dataset['Class']  
+
+# drop all object column 
+  df = df.select_dtypes(exclude=['object'])
