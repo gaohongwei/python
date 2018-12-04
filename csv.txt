@@ -1,0 +1,2 @@
+# Calculate
+  =IF(F3>F2,"Buy","Sell")
