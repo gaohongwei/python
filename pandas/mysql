@@ -1,3 +1,4 @@
+## pip3 install mysql-connector
 ## Need big memory
 
 import mysql.connector as sql
