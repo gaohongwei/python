@@ -1,3 +1,7 @@
+Update:
+cols=['col1', 'col2']
+df.loc[2,cols]=[1,2]
+
 Selection:
   loc,  by label index 
     loc[startrow:endrow, startcolumn:endcolumn]
