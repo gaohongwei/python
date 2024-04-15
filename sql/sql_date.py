@@ -10,11 +10,13 @@ def get_last_n_date_range(n, unit):
         start_date = (current_date - relativedelta(months=n)).strftime('%Y-%m-%d')
     elif unit == 'years':
         start_date = (current_date - relativedelta(years=n)).strftime('%Y-%m-%d')
+    elif unit == 'quarters':
+        start_date = (current_date - relativedelta(months=n*3)).strftime('%Y-%m-%d')
     else:
-        raise ValueError("Invalid unit. Unit must be one of: 'days', 'weeks', 'months', 'years'")
+        raise ValueError("Invalid unit. Unit must be one of: 'days', 'weeks', 'months', 'years', 'quarters'")
     
     end_date = current_date.strftime('%Y-%m-%d')
-    return {"unit": unit, "number": n}, {"start": start_date, "end": end_date}
+    return  {"start": start_date, "end": end_date}
 
 # Example usage
 last_7_days_unit, last_7_days_range = get_last_n_date_range(7, 'days')
