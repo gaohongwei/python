@@ -1,46 +1,37 @@
-//
+def generate_sql(table_name, columns, joins=None, conditions_dict=None, functions=None, order_by=None):
+    # Generate the SELECT clause
+    select_clause = ", ".join(columns)
+    if functions:
+        select_clause = ", ".join(functions)
 
-import datetime
+    # Generate the JOIN clause
+    join_clause = ""
+    if joins:
+        join_pairs = []
+        for join_info in joins:
+            join_type = join_info['type']
+            join_table = join_info['table']
+            join_condition_dict = join_info['condition']
+            join_condition = " AND ".join([f"{join_condition_dict['left_table']}.{join_condition_dict['left_column']} = {join_condition_dict['right_table']}.{join_condition_dict['right_column']}" for key, value in join_condition_dict.items()])
+            join_pairs.append(f"{join_type} JOIN {join_table} ON {join_condition}")
+        join_clause = " ".join(join_pairs)
 
-def get_last_year_date_range():
-    current_date = datetime.datetime.now()
-    last_year_start = (current_date - datetime.timedelta(days=current_date.timetuple().tm_yday + 365)).strftime('%Y-%m-%d')
-    last_year_end = (current_date - datetime.timedelta(days=current_date.timetuple().tm_yday)).strftime('%Y-%m-%d')
-    return last_year_start, last_year_end
-
-def get_last_7_days_date_range():
-    current_date = datetime.datetime.now()
-    last_7_days_start = (current_date - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
-    last_7_days_end = current_date.strftime('%Y-%m-%d')
-    return last_7_days_start, last_7_days_end
-
-def generate_sql_with_conditions_dict(table_name, columns, conditions_dict=None):
-    conditions = []
-    if conditions_dict:
-        for column, value in conditions_dict.items():
-            conditions.append(f"{column} = '{value}'")
-
-    # Add conditions for "last year" or "last 7 days"
-    if 'last_year' in conditions_dict:
-        last_year_start, last_year_end = get_last_year_date_range()
-        conditions.append(f"order_date >= '{last_year_start}' AND order_date <= '{last_year_end}'")
-    elif 'last_7_days' in conditions_dict:
-        last_7_days_start, last_7_days_end = get_last_7_days_date_range()
-        conditions.append(f"order_date >= '{last_7_days_start}' AND order_date <= '{last_7_days_end}'")
-
+    # Generate the WHERE clause
     where_clause = ""
-    if conditions:
-        where_clause = "WHERE " + " AND ".join(conditions)
+    if conditions_dict:
+        where_conditions = []
+        for column, value in conditions_dict.items():
+            where_conditions.append(f"{column} = '{value}'")
+        where_clause = "WHERE " + " AND ".join(where_conditions)
 
-    sql_query = f"SELECT {', '.join(columns)} FROM {table_name} {where_clause};"
+    # Generate the ORDER BY clause
+    order_by_clause = ""
+    if order_by:
+        order_by_functions = []
+        for order in order_by:
+            order_by_functions.append(order['function'] + "(" + order['column'] + ")" + " " + order['direction'])
+        order_by_clause = "ORDER BY " + ", ".join(order_by_functions)
+
+    # Combine clauses to form the SQL query
+    sql_query = f"SELECT {select_clause} FROM {table_name} {join_clause} {where_clause} {order_by_clause};"
     return sql_query
-
-# Example usage
-columns = ["customer_id", "order_date", "total_amount"]
-conditions_dict = {"region": "North", "last_year": True}
-sql_query = generate_sql_with_conditions_dict("orders", columns, conditions_dict)
-print(sql_query)
-
-conditions_dict = {"region": "North", "last_7_days": True}
-sql_query = generate_sql_with_conditions_dict("orders", columns, conditions_dict)
-print(sql_query)
